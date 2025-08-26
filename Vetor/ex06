@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class Ex6 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double[] notas = new double[10];
+        double soma = 0;
+        int acimaMedia = 0;
+
+        for (int i = 0; i < notas.length; i++) {
+            System.out.print("Digite a " + (i + 1) + "ª nota: ");
+            notas[i] = sc.nextDouble();
+            soma += notas[i];
+        }
+
+        double media = soma / notas.length;
+        for (double n : notas) {
+            if (n >= 7.0) {
+                acimaMedia++;
+            }
+        }
+
+        System.out.println("\nMédia da turma: " + media);
+        System.out.println("Alunos com média >= 7: " + acimaMedia);
+        sc.close();
+    }
+}
