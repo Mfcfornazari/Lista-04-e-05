@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class Ex1Matriz {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n;
+
+        // Entrada validada
+        do {
+            System.out.print("Digite um número ímpar entre 3 e 11: ");
+            n = sc.nextInt();
+        } while (n < 3 || n > 11 || n % 2 == 0);
+
+        int[][] matriz = new int[n][n];
+        int soma = 0, maior = Integer.MIN_VALUE, menor = Integer.MAX_VALUE;
+        int pares = 0, impares = 0, somaDiagPrincipal = 0, somaDiagSecundaria = 0;
+
+        // Preenchendo a matriz
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print("Digite o valor para [" + i + "][" + j + "]: ");
+                matriz[i][j] = sc.nextInt();
+                soma += matriz[i][j];
+
+                // Maior e menor
+                if (matriz[i][j] > maior) maior = matriz[i][j];
+                if (matriz[i][j] < menor) menor = matriz[i][j];
+
+                // Pares e ímpares
+                if (matriz[i][j] % 2 == 0) pares++;
+                else impares++;
+
+                // Diagonais
+                if (i == j) somaDiagPrincipal += matriz[i][j];
+                if (i + j == n - 1) somaDiagSecundaria += matriz[i][j];
+            }
+        }
+
+        double media = (double) soma / (n * n);
+
+        // Exibir matriz
+        System.out.println("\nMatriz formatada:");
+        for (int[] linha : matriz) {
+            for (int valor : linha) {
+                System.out.printf("%4d", valor);
+            }
+            System.out.println();
+        }
+
+        // Resultados
+        System.out.println("\nSoma dos elementos: " + soma);
+        System.out.printf("Média dos elementos: %.2f\n", media);
+        System.out.println("Maior valor: " + maior);
+        System.out.println("Menor valor: " + menor);
+        System.out.println("Qtd pares: " + pares);
+        System.out.println("Qtd ímpares: " + impares);
+        System.out.println("Soma diagonal principal: " + somaDiagPrincipal);
+        System.out.println("Soma diagonal secundária: " + somaDiagSecundaria);
+
+        sc.close();
+    }
+}

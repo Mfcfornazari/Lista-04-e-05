@@ -1,0 +1,51 @@
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Scanner;
+
+public class Ex5Cartelas {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Random rand = new Random();
+
+        System.out.print("Quantas cartelas deseja gerar? ");
+        int qtdCartelas = sc.nextInt();
+
+        int[][] cartelas = new int[qtdCartelas][6];
+
+        for (int i = 0; i < qtdCartelas; i++) {
+            int count = 0;
+
+            while (count < 6) {
+                int num = rand.nextInt(60) + 1; // Número entre 1 e 60
+                boolean existe = false;
+
+                // Verificar duplicados
+                for (int j = 0; j < count; j++) {
+                    if (cartelas[i][j] == num) {
+                        existe = true;
+                        break;
+                    }
+                }
+
+                if (!existe) {
+                    cartelas[i][count] = num;
+                    count++;
+                }
+            }
+
+            Arrays.sort(cartelas[i]); // Ordenar cada cartela
+        }
+
+        // Exibir cartelas geradas
+        System.out.println("\n=== CARTELAS GERADAS ===");
+        for (int i = 0; i < qtdCartelas; i++) {
+            System.out.print("Cartela " + (i + 1) + ": ");
+            for (int j = 0; j < 6; j++) {
+                System.out.printf("%02d ", cartelas[i][j]);
+            }
+            System.out.println();
+        }
+
+        sc.close();
+    }
+}

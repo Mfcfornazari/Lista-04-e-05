@@ -1,0 +1,62 @@
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class Atleta {
+    String nome;
+    double[] saltos = new double[5];
+    double media;
+    double melhor;
+    double pior;
+}
+
+public class Ex4Saltos {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Informe o número de atletas: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        Atleta[] atletas = new Atleta[n];
+
+        // Entrada de dados
+        for (int i = 0; i < n; i++) {
+            atletas[i] = new Atleta();
+
+            System.out.print("\nNome do atleta " + (i + 1) + ": ");
+            atletas[i].nome = sc.nextLine();
+
+            double soma = 0;
+            atletas[i].melhor = Double.MIN_VALUE;
+            atletas[i].pior = Double.MAX_VALUE;
+
+            for (int j = 0; j < 5; j++) {
+                System.out.print("Distância do salto " + (j + 1) + " (m): ");
+                atletas[i].saltos[j] = sc.nextDouble();
+                soma += atletas[i].saltos[j];
+
+                if (atletas[i].saltos[j] > atletas[i].melhor) atletas[i].melhor = atletas[i].saltos[j];
+                if (atletas[i].saltos[j] < atletas[i].pior) atletas[i].pior = atletas[i].saltos[j];
+            }
+            sc.nextLine();
+
+            atletas[i].media = soma / 5.0;
+        }
+
+        // Ordenar atletas por média (decrescente)
+        Arrays.sort(atletas, Comparator.comparingDouble((Atleta a) -> a.media).reversed());
+
+        // Exibir resultados
+        System.out.println("\n=== RESULTADOS ===");
+        for (Atleta atleta : atletas) {
+            System.out.println("\nAtleta: " + atleta.nome);
+            System.out.println("Saltos: " + Arrays.toString(atleta.saltos));
+            System.out.printf("Média dos saltos: %.2f m\n", atleta.media);
+            System.out.printf("Melhor salto: %.2f m\n", atleta.melhor);
+            System.out.printf("Pior salto: %.2f m\n", atleta.pior);
+        }
+
+        sc.close();
+    }
+}

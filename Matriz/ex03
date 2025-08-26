@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class Ex3Alunos {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Informe a quantidade de alunos: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        String[] nomes = new String[n];
+        double[][] notas = new double[n][2];
+        double[] medias = new double[n];
+        double somaTurma = 0;
+
+        // Entrada de dados
+        for (int i = 0; i < n; i++) {
+            System.out.print("\nNome do aluno " + (i + 1) + ": ");
+            nomes[i] = sc.nextLine();
+            for (int j = 0; j < 2; j++) {
+                System.out.print("Nota " + (j + 1) + ": ");
+                notas[i][j] = sc.nextDouble();
+            }
+            sc.nextLine();
+            medias[i] = (notas[i][0] + notas[i][1]) / 2;
+            somaTurma += medias[i];
+        }
+
+        double mediaTurma = somaTurma / n;
+
+        // Exibir resultados
+        System.out.printf("\nMédia da turma: %.2f\n", mediaTurma);
+        for (int i = 0; i < n; i++) {
+            System.out.printf("Aluno: %s | Média: %.2f\n", nomes[i], medias[i]);
+        }
+
+        System.out.println("\nAlunos acima da média:");
+        for (int i = 0; i < n; i++) {
+            if (medias[i] > mediaTurma) {
+                System.out.printf("%s (%.2f)\n", nomes[i], medias[i]);
+            }
+        }
+
+        sc.close();
+    }
+}
